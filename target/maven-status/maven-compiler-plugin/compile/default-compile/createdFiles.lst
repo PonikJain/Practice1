@@ -1,0 +1,16 @@
+com/collegeportal/entity/User.class
+com/collegeportal/entity/UserRole.class
+com/collegeportal/dao/impl/UserDaoImpl.class
+com/collegeportal/service/impl/StudentServiceImpl.class
+com/collegeportal/config/WebApplicationContext.class
+com/collegeportal/dao/StudentDao.class
+com/collegeportal/dao/UserDao.class
+com/collegeportal/service/StudentService.class
+com/collegeportal/service/impl/SecurityUserDetailServiceImpl.class
+com/collegeportal/entity/Student.class
+com/collegeportal/config/WebSecurityConfig.class
+com/collegeportal/dao/impl/StudentDaoImpl.class
+com/collegeportal/config/DataBaseConfig.class
+com/collegeportal/controller/LoginController.class
+com/collegeportal/controller/Tester.class
+com/collegeportal/controller/ErrorController.class
