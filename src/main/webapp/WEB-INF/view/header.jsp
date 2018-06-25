@@ -13,6 +13,19 @@
 <script type="text/javascript" src="resources/assets/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="resources/assets/js/bootstrap.min.js"></script>
 
+<script>
+$(document).ready(function(){
+    $('.modal-footer button').click(function(){
+		var button = $(this);
+		var form  = $('#Rform');
+		alert('Submmiting form');
+		form.submit();
+		
+	});
+
+});
+    
+</script>
 
 </head>
 
@@ -51,8 +64,7 @@
 
 
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document" style="max-width: 900px;">
 			<div class="modal-content">
 				<div class="modal-header text-center">
@@ -61,56 +73,66 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form>
-  <div class="input-prepend">
-    <span class="add-on"><i class="icon-envelope"></i></span>
-    <input class="span2" type="text" placeholder="Email address">
-  </div>
-  <div class="input-prepend">
-    <span class="add-on"><i class="icon-key"></i></span>
-    <input class="span2" type="password" placeholder="Password">
-  </div>
-</form>
-				 <!--  <form action="/homepage" method="post">
+
+		 <c:url var="regUrl" value="/register" />
+         <form role="form" id="Rform"  action="${regUrl}" method="post">
 				<div class="container">
+				<div class="modal-body mx-1">
 					<div class="row">
 						<div class="col-md-6">
-							<div class="modal-body mx-1">
+						
 								<div class="md-form mb-1">
-									<i class="fa fa-envelope prefix grey-text"></i>
-									 <input type="email" id="defaultForm-email" class="form-control validate">
-									<label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+									 <input type="text" name="firstName" id="defaultForm-firstame" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-firstame">FirstName</label>
 								</div>
 								
 								<div class="md-form mb-1">
-									<i class="fa fa-lock prefix grey-text"></i>
-									<input type="password" id="defaultForm-pass" class="form-control validate">
-									<label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+									 <input type="text" name="lastName" id="defaultForm-lastName" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-lastName">LastName</label>
 								</div>
+								
+								<div class="md-form mb-1">
+									 <input type="text" name="phoneNumber" id="defaultForm-phoneNumber" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-phoneNumber">PhoneNumber</label>
+								</div>
+								
+								<div class="md-form mb-1">
+									<input type="date" name="dob" id="defaultForm-dob" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-dob">DOB</label>
+								</div>
+								
+								
 							</div>
-						</div>
+						
 						<div class="col-md-6">
-							<div class="modal-body mx-1">
 								<div class="md-form mb-1">
-									<i class="fa fa-envelope prefix grey-text"></i>
-									 <input type="email" id="birthday" class="form-control validate">
-									<label data-error="wrong" data-success="right" for="birthday">Your email</label>
+									<input type="email" name="email" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-email">Email</label>
 								</div>
-
+								
 								<div class="md-form mb-1">
-									<i class="fa fa-lock prefix grey-text"></i>
-									<input type="password" id="fatherName" class="form-control validate">
-									<label data-error="wrong" data-success="right" for="fatherName">Your password</label>
+									 <input type="text" name ="state" id="defaultForm-state" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-state">State</label>
 								</div>
-							</div>
+								
+								<div class="md-form mb-1">
+									<input type="password" id="defaultForm-pass" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
+								</div>
+								
+								<div class="md-form mb-1">
+									 <input type="text" id="defaultForm-cpass" name="password" class="form-control">
+									<label data-error="wrong" data-success="right" for="defaultForm-cpass">Password</label>
+								</div>
+								<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 						</div>
-				
+				</div>
 				</div>
 				<div class="modal-footer d-flex justify-content-center">
-					<button class="btn btn-default">Login</button>
+					<button class="btn btn-success">Register</button>
 				</div>
 			</div>
-			</form> -->
+			</form> 
 		</div>
 	</div>
 	</div>

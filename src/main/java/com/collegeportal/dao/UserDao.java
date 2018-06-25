@@ -4,5 +4,7 @@ import com.collegeportal.entity.User;
 
 public interface UserDao {
 
-	User findByUserName(String username);
+	public User findByUserName(String username);
+	
+	public boolean save(User user);
 }

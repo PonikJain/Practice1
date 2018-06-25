@@ -1,79 +1,143 @@
 package com.collegeportal.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.math.BigInteger;
+import java.util.List;
 
+
+/**
+ * The persistent class for the users database table.
+ * 
+ */
 @Entity
-@Table(name = "users")
-@NamedQuery(name="User.findByUserName", query="select u from User u where u.username=:username") 
-public class User {
+@Table(name="users")
+@NamedQueries({
+		@NamedQuery(name="User.findByEmail", query="select u from User u where u.email=:email"),
+		@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+})
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="user_id", unique=true, nullable=false)
+	private Integer userId;
 
-	private String username;
+	@Temporal(TemporalType.DATE)
+	private Date dob;
+
+	@Column(nullable=false, length=40)
+	private String email;
+
+	@Column(nullable=false, length=20)
+	private String firstname;
+
+	@Column(nullable=false, length=20)
+	private String lastname;
+
+	@Column(nullable=false, length=60)
 	private String password;
-	private boolean enabled;
-	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+
+	@Column(nullable=false)
+	private BigInteger phonenumber;
+
+	@Column(nullable=false, length=30)
+	private String state;
+
+	//bi-directional many-to-one association to UserRole
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	private List<UserRole> userRoles;
 
 	public User() {
 	}
 
-	public User(String username, String password, boolean enabled) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
+	public Integer getUserId() {
+		return this.userId;
 	}
 
-	public User(String username, String password, 
-		boolean enabled, Set<UserRole> userRole) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-		this.userRole = userRole;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	@Id
-	@Column(name = "username", unique = true, 
-		nullable = false, length = 45)
-	public String getUsername() {
-		return this.username;
+	public Date getDob() {
+		return this.dob;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
-	@Column(name = "password", 
-		nullable = false, length = 60)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstname() {
+		return this.firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return this.lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
 	public String getPassword() {
 		return this.password;
 	}
 
 	public void setPassword(String password) {
+		
 		this.password = password;
 	}
 
-	@Column(name = "enabled", nullable = false)
-	public boolean isEnabled() {
-		return this.enabled;
+	public BigInteger getPhonenumber() {
+		return this.phonenumber;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setPhonenumber(BigInteger phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<UserRole> getUserRole() {
-		return this.userRole;
+	public String getState() {
+		return this.state;
 	}
 
-	public void setUserRole(Set<UserRole> userRole) {
-		this.userRole = userRole;
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public List<UserRole> getUserRoles() {
+		return this.userRoles;
+	}
+
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public UserRole addUserRole(UserRole userRole) {
+		getUserRoles().add(userRole);
+		userRole.setUser(this);
+
+		return userRole;
+	}
+
+	public UserRole removeUserRole(UserRole userRole) {
+		getUserRoles().remove(userRole);
+		userRole.setUser(null);
+
+		return userRole;
 	}
 
 }
