@@ -33,30 +33,30 @@ public class SecurityUserDetailServiceImpl implements UserDetailsService {
 	
 	// UserServcieDetails implemented metod
 	@Transactional(readOnly=true)
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.collegeportal.entity.User user = userDao.findByUserName(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		com.collegeportal.entity.User user = userDao.findByUserName(email);
 		
 		if(user==null){
             logger.info("User not found");
             throw new UsernameNotFoundException("Username not found");
         }
 		
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
+		List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
 		return buildUserForAuthentication(user, authorities);
 	}
 
 	// Converts com.collegeportal.entity.User user to
 	// org.springframework.security.core.userdetails.User
 	private User buildUserForAuthentication(com.collegeportal.entity.User user, List<GrantedAuthority> authorities) {
-		return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
+		return new User(user.getEmail(), user.getPassword(), true, true, true, true, authorities);
 	}
 
-	private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+	private List<GrantedAuthority> buildUserAuthority(List<UserRole> list) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
 		// Build user's authorities
-		for (UserRole userRole : userRoles) {
+		for (UserRole userRole : list) {
 			logger.info("UserRoles  : {}", userRole);
 			setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
 		}
