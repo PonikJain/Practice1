@@ -4,5 +4,5 @@ import com.collegeportal.entity.User;
 
 public interface UserService {
 
-	public boolean saveAndUpdate(User user);
+	public User saveAndUpdate(User user);
 }

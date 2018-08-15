@@ -14,12 +14,12 @@ public class UserRoleServiceimpl implements UserRoleService{
 	@Autowired
 	private UserRoleDao userRoleDao;
 	
-	@Transactional
+	@Transactional(readOnly=false)
 	public void save(UserRole role) {
 		userRoleDao.save(role);
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	public void delete(UserRole role) {
 		
 	}

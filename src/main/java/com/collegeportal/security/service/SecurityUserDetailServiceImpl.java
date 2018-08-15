@@ -1,10 +1,9 @@
-package com.collegeportal.service.impl;
+package com.collegeportal.security.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +30,6 @@ public class SecurityUserDetailServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserDao userDao;
 	
-	// UserServcieDetails implemented metod
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		com.collegeportal.entity.User user = userDao.findByUserName(email);
@@ -42,7 +40,9 @@ public class SecurityUserDetailServiceImpl implements UserDetailsService {
         }
 		
 		List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
-		return buildUserForAuthentication(user, authorities);
+		User secUser = buildUserForAuthentication(user, authorities);
+		
+		return secUser;
 	}
 
 	// Converts com.collegeportal.entity.User user to
