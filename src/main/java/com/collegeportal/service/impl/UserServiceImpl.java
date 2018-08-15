@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserDao userDao;
 
-	public boolean saveAndUpdate(User user) {
+	public User saveAndUpdate(User user) {
 		return userDao.save(user);
 	}
 

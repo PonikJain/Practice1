@@ -13,6 +13,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>4.3.0.RELEASE</spring.version>
+		<spring.social.version>1.1.4.RELEASE</spring.social.version>
 		<mysql.connector.version>6.0.5</mysql.connector.version>
 		<jstl.version>1.2</jstl.version>
 		<jackson.version>2.7.3</jackson.version>
@@ -64,6 +65,46 @@
 			<version>4.2.3.RELEASE</version>
 		</dependency>
 
+		<!-- <dependency> <groupId>org.springframework.security.oauth</groupId> 
+			<artifactId>spring-security-oauth2</artifactId> <version>2.0.11.RELEASE</version> 
+			</dependency> -->
+
+		<!-- <dependency> <groupId>org.springframework.social</groupId> <artifactId>spring-social-core</artifactId> 
+			<version>${spring.social.version}</version> </dependency> -->
+
+		<!-- <dependency> <groupId>org.springframework.social</groupId> <artifactId>spring-social-config</artifactId> 
+			<version>${spring.social.version}</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-security</artifactId>
+			<version>${spring.social.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-google -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-facebook -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>2.0.3.RELEASE</version>
+			<exclusions>
+               <exclusion>
+                   <artifactId>spring-social-core</artifactId>
+                   <groupId>org.springframework.social</groupId>
+               </exclusion>
+               <exclusion>
+                   <artifactId>spring-social-config</artifactId>
+                   <groupId>org.springframework.social</groupId>
+               </exclusion>
+           </exclusions>
+		</dependency>
+
 		<!-- Dendencies for ORM -->
 
 		<!-- MySQL database driver -->
@@ -113,6 +154,12 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 
